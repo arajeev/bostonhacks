@@ -37,17 +37,27 @@
             <div> 
                 <textarea id="username"></textarea>
                 <div class="btn btn-default" onclick="updateUsername();">SUBMIT</div>
-  <script>
-  function updateUsername() {
-        var usernameString = document.getElementById("username").value;
+<script>
+function updateUsername() {
+    var usernameString = document.getElementById("username").value;
+    var usernameStringValue;
+    var userRef = myFirebaseRef.child(usernameString)
+    userRef.once("value", function(snapshot) {
+    usernameStringValue=snapshot.val();
+    console.log("usernameStringValue is: ");
+    console.log(usernameStringValue);
+    if (usernameStringValue) {
+        console.log("User already in database");
+    } else {
         var firebaseArray = new Array();
         firebaseArray[usernameString] = usernameString;
         myFirebaseRef.set(firebaseArray);
-    }
-  </script>
+    );
+}
+</script>
                     </div>
                 <div class="panel panel-default" style="height:60%;min-height:60%">
-                    <div class="panel-body"><p>Problem Statement</p>
+                    <div class="panel-body"><p>Implement the Fibonacci sequence for an input integer N. </p>
                     </div>
                 </div>
                 <textarea id="code-textarea" onkeyup="resetCode()" style="visibility:hidden"></textarea>
