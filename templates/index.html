@@ -39,20 +39,23 @@
                 <div class="btn btn-default" onclick="updateUsername();">SUBMIT</div>
 <script>
 function updateUsername() {
+    var myFirebaseRef = new Firebase("https://codebattles.firebaseio.com/");
     var usernameString = document.getElementById("username").value;
-    var usernameStringValue;
-    var userRef = myFirebaseRef.child(usernameString)
+    var userRef = myFirebaseRef.child(usernameString);
     userRef.once("value", function(snapshot) {
-    usernameStringValue=snapshot.val();
-    console.log("usernameStringValue is: ");
-    console.log(usernameStringValue);
-    if (usernameStringValue) {
-        console.log("User already in database");
-    } else {
-        var firebaseArray = new Array();
-        firebaseArray[usernameString] = usernameString;
-        myFirebaseRef.set(firebaseArray);
-    );
+        usernameStringValue=snapshot.val();
+        console.log("usernameStringValue is: ");
+        console.log(usernameStringValue);
+        if (usernameStringValue) {
+            console.log("User already in database");
+        } else {
+            var firebaseArray = new Array();
+            firebaseArray[usernameString] = usernameString;
+            myFirebaseRef.set(firebaseArray);
+            console.log("Added new user!");
+        }
+    });
+    //userRef.off();
 }
 </script>
                     </div>
