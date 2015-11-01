@@ -2,3 +2,23 @@ body {
   padding-top: 70px;
   padding-bottom: 30px;
 }
+
+.progress-bar-container {
+  margin-top: 160px;
+}
+
+.progress-bar-left {
+  margin-left: -145px;
+}
+
+.progress-bar-right {
+  margin-left: -105px;
+  margin-top: -50px;
+}
+
+.vertical {
+  width: 350px;
+  height: 30px;
+  -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+  transform: rotate(-90deg);
+}
