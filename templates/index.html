@@ -36,6 +36,7 @@
             <div class="col-md-10" style="height:600px;min-height:600px">
             
             <div> 
+                <p id="welcome">Welcome!</p>
                 <textarea id="username"></textarea>
                 <div class="btn btn-default" onclick="updateUsername();">SUBMIT</div>
 <script>
@@ -51,6 +52,9 @@ function updateUsername() {
         // update username
         myFirebaseRef.child(userKey).child("username").set(usernameString);
     }
+    var welcomeText = document.getElementById("welcome");
+    welcomeText.innerHTML = "Welcome " + usernameString + "!";
+    console.log(welcomeText.value);
 }
 </script>
                     </div>
