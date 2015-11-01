@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="static/css/yeti.css" rel="stylesheet">
-    <link href="static/css/custom.css" rel="stylesheet">
-    <script src="third-party/google-code-prettify/prettify.js"></script>
-    <script src="third-party/sockjs.js"></script>
-    <link href="third-party/google-code-prettify/prettify.css" rel="stylesheet">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/yeti.css" rel="stylesheet">
+    <link href="../static/css/custom.css" rel="stylesheet">
+    <script src="../third-party/google-code-prettify/prettify.js"></script>
+    <script src="../third-party/sockjs.js"></script>
+    <link href="../third-party/google-code-prettify/prettify.css" rel="stylesheet">
 
     <script type="text/javascript">
         var resetCode = function() {
@@ -58,8 +58,8 @@
                                     <div class="btn btn-info" onclick="onTest();">TEST</div>
                                     <script>
                                     function onTest() {
-                                        sock.send('closing');
-                                        sock.close();
+                                        //sock.send('closing');
+                                        //sock.close();
                                     }
                                     </script>
                                     <div class="btn btn-info">HELP</div>
@@ -71,7 +71,7 @@
                                     <div class="btn btn-success" onclick="onSubmit();">SUBMIT</div>
                                     <script>
                                     function onSubmit() {
-                                        sock.send('submit');
+                                        //sock.send('submit');
                                     }
                                     </script>
                                 </div>
@@ -95,6 +95,8 @@
  sock.onclose = function() {
      console.log('close');
  };
+ 
+ sock.close();
   </script>
 
 
