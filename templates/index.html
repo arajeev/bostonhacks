@@ -12,6 +12,8 @@
     <script type='text/javascript'>
       var myFirebaseRef = new Firebase("https://codebattles.firebaseio.com/");
       var userKey = "";
+      var codeSubmission = "";
+      var codeFunction;
 </script>
   
     <script type="text/javascript">
@@ -61,11 +63,10 @@ function updateUsername() {
                     <div class="panel-body"><p>Implement the Fibonacci sequence for an input integer N. </p>
                     </div>
                 </div>
-                    <div id="editor">function foo(items) {
-    var x = "All this is syntax highlighted";
-    return x;
-    // isn't this amazing
-    }</div>
+                    <div id="editor">// Write your solution here
+function fibonacci(N) {
+    
+}</div>
             </div>
             <div class="col-md-2">
                     <div class="panel panel-info">
@@ -103,10 +104,11 @@ function updateUsername() {
                                     <script>
                                     function onSubmit() {
                                         console.log('submit pressed');
-                                        var code = ace.edit("editor").getValue();
-                                        // get rid of newlines in the editor's code
-                                        // code = code.replace(/(\r\n|\n|\r)/gm,"")
-                                        myFirebaseRef.child(userKey).child("code").set(code);
+                                        codeSubmission = ace.edit("editor").getValue();
+                                        myFirebaseRef.child(userKey).child("code").set(codeSubmission);
+                                        // this makes the function that was 
+                                        // stated in the question
+                                        eval(codeSubmission);
                                     }
                                     </script>
                                 </div>
