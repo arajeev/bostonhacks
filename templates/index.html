@@ -54,7 +54,6 @@ function updateUsername() {
     }
     var welcomeText = document.getElementById("welcome");
     welcomeText.innerHTML = "Welcome " + usernameString + "!";
-    console.log(welcomeText.value);
 }
 </script>
                     </div>
@@ -62,11 +61,11 @@ function updateUsername() {
                     <div class="panel-body"><p>Implement the Fibonacci sequence for an input integer N. </p>
                     </div>
                 </div>
-                <textarea id="code-textarea" onkeyup="resetCode()" style="visibility:hidden"></textarea>
-                <div class="well well-lg"  style="height:40%; min-height:40%">
-                    <pre class="prettyprint lang-js" id="fancy-text" >
-                    </pre>
-                </div>
+                    <div id="editor">function foo(items) {
+    var x = "All this is syntax highlighted";
+    return x;
+    // isn't this amazing
+    }</div>
             </div>
             <div class="col-md-2">
                     <div class="panel panel-info">
@@ -104,18 +103,33 @@ function updateUsername() {
                                     <script>
                                     function onSubmit() {
                                         console.log('submit pressed');
-                                        //sock.send('submit');
+                                        var code = ace.edit("editor").getValue();
+                                        
+                                        myFirebaseRef.child(userKey).child("code").set(code);
                                     }
                                     </script>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
 
     </div>
 </div>
+
+    
+  <script type="text/javascript" charset="utf-8" src="{{ url_for('static', filename='ace-builds/src-noconflict/ace.js') }}"></script>
+  
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/javascript");
+    editor.setOptions({
+        maxLines: 15
+    });
+</script>
 
 
 </body>
