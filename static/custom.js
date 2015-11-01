@@ -87,3 +87,6 @@ function onReset() {
  function onRedemo() {
     myFirebaseRef.remove();
 }
+
+var newPostRef = myFirebaseRef.push();
+userKey = newPostRef.key();
