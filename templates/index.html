@@ -7,6 +7,7 @@
 <link href="{{ url_for('static', filename='third-party/google-code-prettify/prettify.css') }}" rel="stylesheet">
   <script type="text/javascript" src="{{ url_for('static', filename='third-party/google-code-prettify/prettify.js') }}"></script>
   <script src="//cdn.jsdelivr.net/sockjs/1.0.0/sockjs.min.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
 
     <script type="text/javascript">
         var resetCode = function() {
@@ -102,6 +103,19 @@
  sock.close();
   </script> -->
 
+  <script>
+      var myFirebaseRef = new Firebase("https://codebattles.firebaseio.com/");
 
+
+    myFirebaseRef.set({
+      title: "Hello World!",
+      author: "Firebase",
+      location: {
+        city: "San Francisco",
+        state: "California",
+        zip: 94103
+      }
+    });
+</script>
 </body>
 </html>
