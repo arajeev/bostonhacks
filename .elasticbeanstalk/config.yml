@@ -2,8 +2,8 @@ branch-defaults:
   master:
     environment: code-battles-dev
 global:
-  application_name: code-battles
-  default_ec2_keyname: aws-eb
+  application_name: code_battles
+  default_ec2_keyname: aws-eb3
   default_platform: Python 2.7
   default_region: us-east-1
   profile: eb-cli
