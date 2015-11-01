@@ -104,7 +104,8 @@ function updateUsername() {
                                     function onSubmit() {
                                         console.log('submit pressed');
                                         var code = ace.edit("editor").getValue();
-                                        
+                                        // get rid of newlines in the editor's code
+                                        // code = code.replace(/(\r\n|\n|\r)/gm,"")
                                         myFirebaseRef.child(userKey).child("code").set(code);
                                     }
                                     </script>
@@ -120,7 +121,7 @@ function updateUsername() {
 </div>
 
     
-  <script type="text/javascript" charset="utf-8" src="{{ url_for('static', filename='ace-builds/src-noconflict/ace.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='ace-builds/src-noconflict/ace.js') }}"></script>
   
 <script>
     var editor = ace.edit("editor");
