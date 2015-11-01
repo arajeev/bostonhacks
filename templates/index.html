@@ -9,85 +9,22 @@
   <script src="//cdn.jsdelivr.net/sockjs/1.0.0/sockjs.min.js"></script>
   <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='src-noconflict/ace.js') }}"></script>
-    <script type='text/javascript'>
-        var myFirebaseRef = new Firebase("https://codebattles.firebaseio.com/");
-        var userKey = "";
-        var otherKey = "";
-        var codeSubmission = "";
-        var codeFunction;
-        var fibonacci;
-        var score;
-        var yourProgress = 0;
-        var theirProgress = 0;
-        function assert(condition, message) {
-            //if (!condition) {
-                // message = message || "Assertion failed";
-                // if (typeof Error !== "undefined") {
-                //    throw new Error(message);
-                // }
-                // throw message; // Fallback
-            //}
-            return condition;
-        }
-    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='third-party/jquery-2.1.4.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='third-party/bootstrap.min.js') }}"></script>
 
-    <script type="text/javascript">
-        var resetCode = function() {
-            var code = document.getElementById("code-textarea").value;
-
-            var highlightedCode = document.getElementById("fancy-text");
-
-            highlightedCode.innerHTML = code;
-            highlightedCode.className = "prettyprint lang-js";
-
-            prettyPrint();
-        };
-    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='custom.js') }}"></script>
 
 </head>
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <div class="col-md-10" style="height:600px;min-height:600px">
-
+        <div class="col-md-3" id="left-col"></div>
+        <div class="col-md-6" style="background-color: white;padding-top: 50px;">
+            <img id="logo" src="{{ url_for('static', filename='logo.png') }}"/>
+            <div class="col-md-9" style="height:650px;min-height:650px;padding-top:20px">
             <div>
-                <p id="welcome">Welcome!</p>
-                <textarea id="username"></textarea>
-                <div class="btn btn-default" onclick="updateUsername();">SUBMIT</div>
-<script>
-function updateUsername() {
-    var usernameString = document.getElementById("username").value;
-    if (userKey === "") {
-        // insert username
-        var firebaseArray = new Array();
-        firebaseArray["username"] = usernameString;
-        var newPostRef = myFirebaseRef.push(firebaseArray);
-        userKey = newPostRef.key();
-    } else {
-        // update username
-        myFirebaseRef.child(userKey).child("username").set(usernameString);
-    }
-    var welcomeText = document.getElementById("welcome");
-    welcomeText.innerHTML = "Welcome " + usernameString + "!";
-    myFirebaseRef.once('value', function(dataSnapshot) {
-        dataSnapshot.forEach(function(data){
-          if(data.key() != userKey) {
-            otherKey = data.key();
-          }
-        })
-        if(otherKey != "") {
-          myFirebaseRef.child(otherKey).on('value', function(snapshot) {
-            var theirProgressBar = document.getElementById('otherprogress');
-            theirProgressBar.style.width = snapshot.val().score + "%";
-          })
-        }
-    })
-}
-</script>
                     </div>
-                <div class="panel panel-default" style="height:40%;min-height:40%">
+                <div class="panel panel-default" style="height:50%;min-height:50%">
                     <div class="panel-body"><p>Write a function to calculate the Nth result in a Fibonacci sequence starting with 1, 1, 2, etc. Your function should accept an integer N and return an integer with your answer. </p>
 
                     <p>For example, </p>
@@ -97,26 +34,20 @@ int b = 4;
 int c = 10;
 fibonacci(a); // returns 1
 fibonacci(b); // returns 3
-fibonacci(c); // returns 55</pre>
+fibonacci(c); // returns 55
+                    </pre>
                     </div>
                 </div>
-                    <div id="editor" style="height:60%;minheight:60%">// Write your solution here
+                    <div id="editor" style="height:40%;min-height:40%">// Write your solution here
 function fibonacci(N) {
 
 }
-
-
-
-
-
-
-
 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                     <div class="panel panel-info">
                         <div class="panel-heading">Progress</div>
-                        <div class="panel-body" style="height:575px">
+                        <div class="panel-body" style="height:530px">
                             <div class="row" style="height:375px">
                                 <div class="progress-bar-container ">
                                     <div class="progress vertical progress-bar-left">
@@ -146,42 +77,11 @@ function fibonacci(N) {
                             <div class="row" style="margin-top:25px">
                                 <div class="text-center">
                                     <div class="btn btn-success" onclick="onSubmit();">SUBMIT</div>
-                                    <script>
-                                    function onSubmit() {
-                                        console.log('submit pressed');
-                                        codeSubmission = ace.edit("editor").getValue();
-                                        myFirebaseRef.child(userKey).child("code").set(codeSubmission);
-                                        // this makes the function that was
-                                        // stated in the question
-                                        eval(codeSubmission);
-                                        score = testFib();
-                                        console.log(score);
-                                        myFirebaseRef.child(userKey).child("score").set(score);
-                                        yourProgress = score;
-                                        var yourProgressBar = document.getElementById("selfprogress");
-                                        yourProgressBar.style.width = yourProgress+"%";
-                                        //other player joins after you -> the otherKey is empty
-                                        if(otherKey === "") {
-                                          myFirebaseRef.once('value', function(dataSnapshot) {
-                                              dataSnapshot.forEach(function(data){
-                                                if(data.key() != userKey) {
-                                                  otherKey = data.key();
-                                                }
-                                              })
-                                              if(otherKey != "") {
-                                                myFirebaseRef.child(otherKey).on('value', function(snapshot) {
-                                                  var theirProgressBar = document.getElementById('otherprogress');
-                                                  theirProgressBar.style.width = snapshot.val().score + "%";
-                                                })
-                                              }
-                                          })
-                                        }
-                                    }
-                                    </script>
                                 </div>
                             </div>
                         </div>
                     </div>
+                <div class="col-md-2" id="right-col"></div>
                 </div>
             </div>
         </div>
