@@ -160,6 +160,22 @@ function fibonacci(N) {
                                         yourProgress = score;
                                         var yourProgressBar = document.getElementById("selfprogress");
                                         yourProgressBar.style.width = yourProgress+"%";
+                                        //other player joins after you -> the otherKey is empty
+                                        if(otherKey === "") {
+                                          myFirebaseRef.once('value', function(dataSnapshot) {
+                                              dataSnapshot.forEach(function(data){
+                                                if(data.key() != userKey) {
+                                                  otherKey = data.key();
+                                                }
+                                              })
+                                              if(otherKey != "") {
+                                                myFirebaseRef.child(otherKey).on('value', function(snapshot) {
+                                                  var theirProgressBar = document.getElementById('otherprogress');
+                                                  theirProgressBar.style.width = snapshot.val().score + "%";
+                                                })
+                                              }
+                                          })
+                                        }
                                     }
                                     </script>
                                 </div>
