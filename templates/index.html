@@ -10,11 +10,23 @@
   <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='src-noconflict/ace.js') }}"></script>
     <script type='text/javascript'>
-      var myFirebaseRef = new Firebase("https://codebattles.firebaseio.com/");
-      var userKey = "";
-      var codeSubmission = "";
-      var codeFunction;
-</script>
+        var myFirebaseRef = new Firebase("https://codebattles.firebaseio.com/");
+        var userKey = "";
+        var codeSubmission = "";
+        var codeFunction;
+        var fibonacci;
+        var score;
+        function assert(condition, message) {
+            //if (!condition) {
+                // message = message || "Assertion failed";
+                // if (typeof Error !== "undefined") {
+                //    throw new Error(message);
+                // }
+                // throw message; // Fallback
+            //}
+            return condition;
+        }
+    </script>
   
     <script type="text/javascript">
         var resetCode = function() {
@@ -126,6 +138,8 @@ function fibonacci(N) {
                                         // this makes the function that was 
                                         // stated in the question
                                         eval(codeSubmission);
+                                        score = testFib();
+                                        console.log(score);
                                     }
                                     </script>
                                 </div>
@@ -147,6 +161,23 @@ function fibonacci(N) {
     editor.setOptions({
         maxLines: 18
     });
+</script>
+
+<script>
+function testFib() {
+    eval(codeSubmission);
+    var count = 0;
+    if (fibonacci(1) == 1) {
+        count = count + 1;
+    }
+    if (fibonacci(4) == 4) {
+        count = count + 1;
+    }
+    if (fibonacci(10) == 55) {
+        count = count + 1;
+    }
+    return count / 3 * 100;
+}
 </script>
 
 
