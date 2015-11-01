@@ -1,8 +1,8 @@
 from flask import Flask, request, render_template
 
-app = Flask(__name__)
+application = Flask(__name__)
 
-@app.route('/')
+@application.route('/')
 def main_page():
     return render_template('index.html', message='mainpage')
 
@@ -10,5 +10,5 @@ def main_page():
 if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
     # removed before deploying a production app.
-    app.debug = True
-    app.run()
+    application.debug = True
+    application.run()
