@@ -9,6 +9,10 @@
   <script src="//cdn.jsdelivr.net/sockjs/1.0.0/sockjs.min.js"></script>
   <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
 
+    <script type='text/javascript'>
+      var myFirebaseRef = new Firebase("https://codebattles.firebaseio.com/");
+</script>
+  
     <script type="text/javascript">
         var resetCode = function() {
             var code = document.getElementById("code-textarea").value;
@@ -29,6 +33,19 @@
         <div class="col-md-2"></div>
         <div class="col-md-8">
             <div class="col-md-10" style="height:600px;min-height:600px">
+            
+            <div> 
+                <textarea id="username"></textarea>
+                <div class="btn btn-default" onclick="updateUsername();">SUBMIT</div>
+  <script>
+  function updateUsername() {
+        var usernameString = document.getElementById("username").value;
+        var firebaseArray = new Array();
+        firebaseArray[usernameString] = usernameString;
+        myFirebaseRef.set(firebaseArray);
+    }
+  </script>
+                    </div>
                 <div class="panel panel-default" style="height:60%;min-height:60%">
                     <div class="panel-body"><p>Problem Statement</p>
                     </div>
@@ -89,33 +106,5 @@
 </div>
 
 
-<!-- <script> var sock = new SockJS('http://code-battles-dev.elasticbeanstalk.com/');
- sock.onopen = function() {
-     console.log('open');
- };
- sock.onmessage = function(e) {
-     console.log('message', e.data);
- };
- sock.onclose = function() {
-     console.log('close');
- };
- 
- sock.close();
-  </script> -->
-
-  <script>
-      var myFirebaseRef = new Firebase("https://codebattles.firebaseio.com/");
-
-
-    myFirebaseRef.set({
-      title: "Hello World!",
-      author: "Firebase",
-      location: {
-        city: "San Francisco",
-        state: "California",
-        zip: 94103
-      }
-    });
-</script>
 </body>
 </html>
