@@ -11,6 +11,7 @@
 
     <script type='text/javascript'>
       var myFirebaseRef = new Firebase("https://codebattles.firebaseio.com/");
+      var userKey = "";
 </script>
   
     <script type="text/javascript">
@@ -39,23 +40,27 @@
                 <div class="btn btn-default" onclick="updateUsername();">SUBMIT</div>
 <script>
 function updateUsername() {
+    if (userKey === "") {
+    
     var myFirebaseRef = new Firebase("https://codebattles.firebaseio.com/");
+    console.log("myFirebaseRef is: ");
+    console.log(myFirebaseRef);
     var usernameString = document.getElementById("username").value;
     var userRef = myFirebaseRef.child(usernameString);
     userRef.once("value", function(snapshot) {
         usernameStringValue=snapshot.val();
         console.log("usernameStringValue is: ");
         console.log(usernameStringValue);
-        if (usernameStringValue) {
-            console.log("User already in database");
-        } else {
-            var firebaseArray = new Array();
-            firebaseArray[usernameString] = usernameString;
-            myFirebaseRef.set(firebaseArray);
-            console.log("Added new user!");
-        }
+        var firebaseArray = new Array();
+        firebaseArray[usernameString] = usernameString;
+        var newPostRef = myFirebaseRef.push(firebaseArray);
+        userKey = newPostRef.key();
+        console.log("Added new user!");
+        console.log(userKey);
     });
-    //userRef.off();
+    } else {
+    // do nothing
+    }
 }
 </script>
                     </div>
