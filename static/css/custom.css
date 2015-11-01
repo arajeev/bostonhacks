@@ -25,8 +25,9 @@ body {
 
 #logo {
   width: 400px;
-  margin-top: -40px;
-  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom:20px;
+  margin-left: 100px;
 }
 
 .btn-group-vertical {

@@ -47,7 +47,7 @@ function assert(condition, message) {
   return condition;
 }
 
-function onSubmit() {
+function calculateScore() {
   codeSubmission = ace.edit("editor").getValue();
   myFirebaseRef.child(userKey).child("code").set(codeSubmission);
   // this makes the function that was
@@ -77,6 +77,10 @@ function onSubmit() {
   }
 }
 
+function onSubmit() {
+  calculateScore();
+}
+
 function onReset() {
     codeSubmission = "";
     ace.edit("editor").setValue("// Write your solution here \n function fibonacci(N) { \n    \n }\n \n \n \n \n \n \n \n ");
@@ -86,7 +90,9 @@ function onReset() {
  function onRedemo() {
     myFirebaseRef.remove();
 }
-$(window).onLoad(function() {
+$(window).on("load", function() {
   var newPostRef = myFirebaseRef.push();
   userKey = newPostRef.key();
+
+  calculateScore();
 });
