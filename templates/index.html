@@ -12,6 +12,7 @@
     <script type='text/javascript'>
         var myFirebaseRef = new Firebase("https://codebattles.firebaseio.com/");
         var userKey = "";
+        var otherKey = "";
         var codeSubmission = "";
         var codeFunction;
         var fibonacci;
@@ -29,7 +30,7 @@
             return condition;
         }
     </script>
-  
+
     <script type="text/javascript">
         var resetCode = function() {
             var code = document.getElementById("code-textarea").value;
@@ -42,7 +43,7 @@
             prettyPrint();
         };
     </script>
-    
+
 </head>
 <body>
 <div class="container-fluid">
@@ -50,8 +51,8 @@
         <div class="col-md-2"></div>
         <div class="col-md-8">
             <div class="col-md-10" style="height:600px;min-height:600px">
-            
-            <div> 
+
+            <div>
                 <p id="welcome">Welcome!</p>
                 <textarea id="username"></textarea>
                 <div class="btn btn-default" onclick="updateUsername();">SUBMIT</div>
@@ -70,12 +71,25 @@ function updateUsername() {
     }
     var welcomeText = document.getElementById("welcome");
     welcomeText.innerHTML = "Welcome " + usernameString + "!";
+    myFirebaseRef.once('value', function(dataSnapshot) {
+        dataSnapshot.forEach(function(data){
+          if(data.key() != userKey) {
+            otherKey = data.key();
+          }
+        })
+        if(otherKey != "") {
+          myFirebaseRef.child(otherKey).on('value', function(snapshot) {
+            var theirProgressBar = document.getElementById('otherprogress');
+            theirProgressBar.style.width = snapshot.val().score + "%";
+          })
+        }
+    })
 }
 </script>
                     </div>
                 <div class="panel panel-default" style="height:40%;min-height:40%">
                     <div class="panel-body"><p>Write a function to calculate the Nth result in a Fibonacci sequence starting with 1, 1, 2, etc. Your function should accept an integer N and return an integer with your answer. </p>
-                    
+
                     <p>For example, </p>
                     <pre>
 int a = 1;
@@ -88,7 +102,7 @@ fibonacci(c); // returns 55</pre>
                 </div>
                     <div id="editor" style="height:60%;minheight:60%">// Write your solution here
 function fibonacci(N) {
-    
+
 }
 
 
@@ -137,7 +151,7 @@ function fibonacci(N) {
                                         console.log('submit pressed');
                                         codeSubmission = ace.edit("editor").getValue();
                                         myFirebaseRef.child(userKey).child("code").set(codeSubmission);
-                                        // this makes the function that was 
+                                        // this makes the function that was
                                         // stated in the question
                                         eval(codeSubmission);
                                         score = testFib();
@@ -159,7 +173,7 @@ function fibonacci(N) {
     </div>
 </div>
 
-  
+
 <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
