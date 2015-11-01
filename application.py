@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template
+from flask_socketio import SocketIO
 
 application = Flask(__name__)
 

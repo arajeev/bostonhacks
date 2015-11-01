@@ -6,7 +6,7 @@
   <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
 <link href="{{ url_for('static', filename='third-party/google-code-prettify/prettify.css') }}" rel="stylesheet">
   <script type="text/javascript" src="{{ url_for('static', filename='third-party/google-code-prettify/prettify.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='third-party/sockjs.js') }}"></script>
+  <script src="//cdn.jsdelivr.net/sockjs/1.0.0/sockjs.min.js"></script>
 
     <script type="text/javascript">
         var resetCode = function() {
@@ -20,6 +20,7 @@
             prettyPrint();
         };
     </script>
+    
 </head>
 <body>
 <div class="container-fluid">
@@ -58,6 +59,7 @@
                                     <div class="btn btn-info" onclick="onTest();">TEST</div>
                                     <script>
                                     function onTest() {
+                                        console.log('test pressed');
                                         //sock.send('closing');
                                         //sock.close();
                                     }
@@ -71,6 +73,7 @@
                                     <div class="btn btn-success" onclick="onSubmit();">SUBMIT</div>
                                     <script>
                                     function onSubmit() {
+                                        console.log('submit pressed');
                                         //sock.send('submit');
                                     }
                                     </script>
@@ -85,7 +88,7 @@
 </div>
 
 
-<script> var sock = new SockJS('http://code-battles-dev.elasticbeanstalk.com');
+<!-- <script> var sock = new SockJS('http://code-battles-dev.elasticbeanstalk.com/');
  sock.onopen = function() {
      console.log('open');
  };
@@ -95,9 +98,9 @@
  sock.onclose = function() {
      console.log('close');
  };
-
+ 
  sock.close();
-  </script>
+  </script> -->
 
 
 </body>
