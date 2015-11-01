@@ -40,7 +40,7 @@ fibonacci(c); // returns 55
                 </div>
                     <div id="editor" style="height:40%;min-height:40%">// Write your solution here
 function fibonacci(N) {
-
+    
 }
 </div>
             </div>
@@ -62,16 +62,13 @@ function fibonacci(N) {
                             </div>
                             <div class="text-center">
                                 <div class="btn-group-vertical" role="group">
-                                    <div class="btn btn-info" onclick="onTest();">TEST</div>
-                                    <script>
-                                    function onTest() {
-                                        console.log('test pressed');
-                                        //sock.send('closing');
-                                        //sock.close();
-                                    }
-                                    </script>
-                                    <div class="btn btn-info">HELP</div>
-                                    <div class="btn btn-info">RESET</div>
+                                    <div class="btn btn-info" onclick="onReset();">RESET</div>
+<script>
+function onReset() {
+    codeSubmission = "";
+    ace.edit("editor").setValue("// Write your solution here \n function fibonacci(N) { \n    \n }\n \n \n \n \n \n \n \n ");
+}
+</script>
                                 </div>
                             </div>
                             <div class="row" style="margin-top:25px">
