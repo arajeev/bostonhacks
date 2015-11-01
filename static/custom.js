@@ -48,9 +48,6 @@ function assert(condition, message) {
 }
 
 function onSubmit() {
-  var newPostRef = myFirebaseRef.push();
-  userKey = newPostRef.key();
-
   codeSubmission = ace.edit("editor").getValue();
   myFirebaseRef.child(userKey).child("code").set(codeSubmission);
   // this makes the function that was
