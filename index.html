@@ -4,7 +4,21 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/yeti.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script src="third-party/google-code-prettify/prettify.js"></script>
+    <link href="third-party/google-code-prettify/prettify.css" rel="stylesheet">
+
+    <script type="text/javascript">
+        var resetCode = function() {
+            var code = document.getElementById("code-textarea").value;
+
+            var highlightedCode = document.getElementById("fancy-text");
+
+            highlightedCode.innerHTML = code;
+            highlightedCode.className = "prettyprint lang-js";
+
+            prettyPrint();
+        };
+    </script>
 </head>
 <body>
 <div class="container-fluid">
@@ -16,13 +30,11 @@
                     <div class="panel-body"><p>Problem Statement</p>
                     </div>
                 </div>
-                <div class="well well-lg"  style="height:40%; min-height:40%"><pre class="prettyprint">class Voila {
-public:
-  // Voila
-  static const string VOILA = "Voila";
-
-  // will not interfere with embedded <a href="#voila2">tags</a>.
-}</pre></div>
+                <textarea id="code-textarea" onkeyup="resetCode()" style="visibility:hidden"></textarea>
+                <div class="well well-lg"  style="height:40%; min-height:40%">
+                    <pre class="prettyprint lang-js" id="fancy-text" >
+                    </pre>
+                </div>
             </div>
             <div class="col-md-2">
                     <div class="panel panel-info">
@@ -59,9 +71,6 @@ public:
 
     </div>
 </div>
-
-
-
 
 </body>
 </html>
