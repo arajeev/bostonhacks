@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/yeti.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/custom.css' }}" rel="stylesheet">
+    <script src="third-party/google-code-prettify/prettify.js"></script>
+    <link href="third-party/google-code-prettify/prettify.css" rel="stylesheet">
+
+    <script type="text/javascript">
+        var resetCode = function() {
+            var code = document.getElementById("code-textarea").value;
+
+            var highlightedCode = document.getElementById("fancy-text");
+
+            highlightedCode.innerHTML = code;
+            highlightedCode.className = "prettyprint lang-js";
+
+            prettyPrint();
+        };
+    </script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="col-md-10" style="height:600px;min-height:600px">
+                <div class="panel panel-default" style="height:60%;min-height:60%">
+                    <div class="panel-body"><p>Problem Statement</p>
+                    </div>
+                </div>
+                <textarea id="code-textarea" onkeyup="resetCode()" style="visibility:hidden"></textarea>
+                <div class="well well-lg"  style="height:40%; min-height:40%">
+                    <pre class="prettyprint lang-js" id="fancy-text" >
+                    </pre>
+                </div>
+            </div>
+            <div class="col-md-2">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">Progress</div>
+                        <div class="panel-body" style="height:575px">
+                            <div class="row" style="height:375px">
+                                <div class="progress-bar-container ">
+                                    <div class="progress vertical progress-bar-left">
+                                        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                        </div>
+                                    </div>
+                                    <div class="progress vertical progress-bar-right">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <div class="btn-group-vertical" role="group">
+                                    <div class="btn btn-info">TEST</div>
+                                    <div class="btn btn-info">HELP</div>
+                                    <div class="btn btn-info">RESET</div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:25px">
+                                <div class="text-center">
+                                    <div class="btn btn-success">SUBMIT</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
