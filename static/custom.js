@@ -79,3 +79,14 @@ function onSubmit() {
     })
   }
 }
+
+
+function onReset() {
+    codeSubmission = "";
+    ace.edit("editor").setValue("// Write your solution here \n function fibonacci(N) { \n    \n }\n \n \n \n \n \n \n \n ");
+}
+
+
+ function onRedemo() {
+    myFirebaseRef.remove();
+}
