@@ -140,6 +140,7 @@ function fibonacci(N) {
                                         eval(codeSubmission);
                                         score = testFib();
                                         console.log(score);
+                                        myFirebaseRef.child(userKey).child("score").set(score);
                                     }
                                     </script>
                                 </div>
