@@ -77,7 +77,6 @@ function onSubmit() {
   }
 }
 
-
 function onReset() {
     codeSubmission = "";
     ace.edit("editor").setValue("// Write your solution here \n function fibonacci(N) { \n    \n }\n \n \n \n \n \n \n \n ");
@@ -87,6 +86,7 @@ function onReset() {
  function onRedemo() {
     myFirebaseRef.remove();
 }
-
-var newPostRef = myFirebaseRef.push();
-userKey = newPostRef.key();
+$(window).onLoad(function() {
+  var newPostRef = myFirebaseRef.push();
+  userKey = newPostRef.key();
+});
